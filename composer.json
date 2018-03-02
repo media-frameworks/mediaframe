@@ -1,0 +1,20 @@
+{
+  "name": "mediaframe",
+  "description": "JSON-formatted markup rendering engine",
+  "type": "library",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Mike Hall",
+      "email": "mikehallvideo@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0"
+  },
+  "autoload": {
+    "classmap": [
+      "/"
+    ]
+  }
+}
