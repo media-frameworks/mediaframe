@@ -27,6 +27,7 @@ class Semantic extends Element
     CONST ELEMENT_SEMANTIC_SUMMARY_CLASS = self::BASE_CLASS_SEMANTIC . 'Summary';
     CONST ELEMENT_SEMANTIC_LOCATION_CLASS = self::BASE_CLASS_SEMANTIC . 'Location';
     CONST ELEMENT_SEMANTIC_IFRAME_CLASS = self::BASE_CLASS_SEMANTIC . 'IFrame';
+    CONST ELEMENT_SEMANTIC_TEXT_CLASS = self::BASE_CLASS_SEMANTIC . 'Text';
 
     public function __construct($tag_name)
     {
@@ -49,6 +50,7 @@ class Semantic extends Element
             'summary' => self::ELEMENT_SEMANTIC_SUMMARY_CLASS,
             'location' => self::ELEMENT_SEMANTIC_LOCATION_CLASS,
             'iframe' => self::ELEMENT_SEMANTIC_IFRAME_CLASS,
+            'text' => self::ELEMENT_SEMANTIC_TEXT_CLASS,
         );
     }
 

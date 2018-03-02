@@ -48,11 +48,6 @@
             if (strlen($elements)) {
                 $result .= "\n" . $elements;
             }
-            if (isset ($markup->text)) {
-                $result .= $markup->text;
-            } else {
-                $result .= $indent;
-            }
             $result .= '</form>' . "\n";
             return $result;
         }

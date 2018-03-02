@@ -62,7 +62,11 @@ class Script extends Code
             $result .= $this->openScriptTag($markup);
             if (is_array($markup->code)) {
                 foreach ($markup->code as $line) {
-                    $result .= "\n   " . $indent . $line;
+                    if (!is_string($line)) {
+                        $result .= parent::renderElements($line);
+                    } else {
+                        $result .= "\n   " . $indent . $line;
+                    }
                 }
                 $result .= "\n" . $indent;
             } else {

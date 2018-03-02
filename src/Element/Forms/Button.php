@@ -45,9 +45,7 @@ class Button extends Forms
         $result = $indent . '<button';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
-        if (isset ($markup->text)) {
-            $result .= $markup->text;
-        }
+        $result .= $elements;
         $result .= '</button>' . "\n";
         return $result;
     }

@@ -45,10 +45,6 @@ class Textarea extends Forms
         $result = $indent . '<textarea';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
-        if (isset ($markup->text)) {
-            $text = Stack::renderText($markup->text);
-            $result .= $text;
-        }
         $result .= '</textarea>' . "\n";
         return $result;
     }

@@ -30,17 +30,24 @@ class ForLoop extends Code
             echo("index is not set in for loop\n");
             return $content;
         }
+        if (!isset ($markup->markup)) {
+            echo("markup is not set in for loop\n");
+            return $content;
+        }
         $update = $markup->update ? $markup->update : null;
 
+        $indent = self::getIndent();
         while (true) {
             $expression = Stack::valueSubstitutions($markup->test);
             $full_expression = 'return(' . $expression . ')?1:null;';
             if (!eval($full_expression)) {
                 break;
             }
-            $div_markup = new \stdClass();
-            $div_markup->div = $markup->div;
-            $content .= parent::renderElements($div_markup);
+            if (is_string($markup->markup)) {
+                $content .= "\n" . $indent . Stack::valueSubstitutions($markup->markup);
+            } else {
+                $content .= parent::renderElements($markup->markup);
+            }
             if ($update) {
                 $expression = Stack::valueSubstitutions($update);
                 Stack::setVar($markup->index, eval('return ' . $expression . ';'));

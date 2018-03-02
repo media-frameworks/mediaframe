@@ -90,7 +90,7 @@ class Stack
 
     static public function setConstant($name, $value)
     {
-        if (!is_string($value)) {
+        if (!is_string($value) && (!is_numeric($value))) {
             $value = self::renderText($value);
         }
         self::$frames[self::$frame_index]->constants[strtolower($name)] = $value;

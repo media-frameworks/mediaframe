@@ -37,10 +37,6 @@ class Span extends Semantic
         if (strlen($elements)) {
             $result .= "\n" . $elements . $indent;
         }
-        if (isset ($markup->text)) {
-            $text = Stack::renderText($markup->text);
-            $result .= $text;
-        }
         $result .= '</span>' . "\n";
         return $result;
     }
