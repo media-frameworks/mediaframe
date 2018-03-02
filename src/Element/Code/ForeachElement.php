@@ -49,7 +49,6 @@ class ForeachElement extends Code
         $dataset = null;
         if (isset($markup->dataset)) {
             $dataset = Stack::valueSubstitutions($markup->dataset);
-            var_dump($dataset);
             if (is_string($dataset)) {
                 $data = Stack::getData($dataset);
                 if (isset($data->file)) {

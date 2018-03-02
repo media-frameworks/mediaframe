@@ -23,6 +23,7 @@ class ForLoop extends Code
         }
         if (!isset ($markup->test)) {
             echo("test is not set in for loop\n");
+            var_dump($markup);
             return $content;
         }
         if (!isset ($markup->index)) {
