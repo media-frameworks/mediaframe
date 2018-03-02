@@ -21,6 +21,12 @@ class ForLoop extends Code
                 Stack::setVar($name, $value);
             }
         }
+        if (isset($markup->const)) {
+            foreach ($markup->const as $name => $value) {
+                Stack::setConstant($name, $value);
+            }
+        }
+
         if (!isset ($markup->test)) {
             echo("test is not set in for loop\n");
             var_dump($markup);
