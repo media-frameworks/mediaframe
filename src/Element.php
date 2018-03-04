@@ -23,6 +23,7 @@ abstract class Element
     CONST ELEMENT_TABLE_CLASS_NAME = self::BASE_CLASS_ELEMENT . 'Tables';
     CONST ELEMENT_SEMANTIC_CLASS_NAME = self::BASE_CLASS_ELEMENT . 'Semantic';
     CONST ELEMENT_CODE_CLASS_NAME = self::BASE_CLASS_ELEMENT . 'Code';
+    CONST ELEMENT_DATABASE_CLASS_NAME = self::BASE_CLASS_ELEMENT . 'Database';
 
     CONST ELEMENT_CLASS_ROOTS = array(
         self::ELEMENT_BASIC_CLASS_NAME,
@@ -36,6 +37,7 @@ abstract class Element
         self::ELEMENT_TABLE_CLASS_NAME,
         self::ELEMENT_SEMANTIC_CLASS_NAME,
         self::ELEMENT_CODE_CLASS_NAME,
+        self::ELEMENT_DATABASE_CLASS_NAME,
     );
 
     static $tagNameMap = array();
