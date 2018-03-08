@@ -29,7 +29,7 @@ class Heading extends Basic
 
     public function render($markup)
     {
-        $indent = self::getIndent($markup);
+        $indent = self::getIndent();
         $heading_text = Stack::renderText($markup);
 
         $attributes = Attribute::renderAttributes($markup, self::$supportedAttrs);

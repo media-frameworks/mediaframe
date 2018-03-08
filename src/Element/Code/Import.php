@@ -19,8 +19,12 @@ class Import extends Code
     {
         $app_root = Stack::getConstant('global::app_root');
         $script = $markup;
+        $strip_newlines = false;
         if (is_object($markup)) {
             $script = $markup->script;
+            if (isset($markup->strip_newlines)){
+                $strip_newlines = $markup->strip_newlines;
+            }
         }
         $base_dir = $app_root;
         $script = Stack::valueSubstitutions($script);
@@ -54,6 +58,9 @@ class Import extends Code
                 }
             }
             $rendered = Element::renderElements($code, true);
+            if ($strip_newlines) {
+                $rendered = str_replace("\n", '', $rendered);
+            }
             Stack::shareFrame();
             return $rendered;
         }
