@@ -38,16 +38,13 @@ class Anchor extends Link
     {
         $indent = self::getIndent();
         $elements = parent::renderElements($markup);
-        $result = $indent . '<a';
+        $result = "\n" . $indent . '<a';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
         if (strlen($elements)) {
-            $result .= "\n" . $elements;
+            $result .= $elements . "\n" . $indent;
         }
-        if (isset($markup->div) || isset($markup->span)) {
-            $result .= $indent;
-        }
-        $result .= '</a>' . "\n";
+        $result .= '</a>';
         return $result;
     }
 

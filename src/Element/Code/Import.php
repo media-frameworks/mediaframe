@@ -15,6 +15,16 @@ class Import extends Code
         parent::__construct($tag_name);
     }
 
+    private function strip_newlines($text)
+    {
+        $all_lines = explode("\n", $text);
+        $result = '';
+        foreach ($all_lines as $line){
+            $result .= trim($line);
+        }
+        return $result;
+    }
+
     public function render($markup)
     {
         $app_root = Stack::getConstant('global::app_root');
@@ -22,7 +32,7 @@ class Import extends Code
         $strip_newlines = false;
         if (is_object($markup)) {
             $script = $markup->script;
-            if (isset($markup->strip_newlines)){
+            if (isset($markup->strip_newlines)) {
                 $strip_newlines = $markup->strip_newlines;
             }
         }
@@ -59,7 +69,7 @@ class Import extends Code
             }
             $rendered = Element::renderElements($code, true);
             if ($strip_newlines) {
-                $rendered = str_replace("\n", '', $rendered);
+                $rendered = $this->strip_newlines($rendered);
             }
             Stack::shareFrame();
             return $rendered;

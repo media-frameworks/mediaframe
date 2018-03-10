@@ -61,9 +61,9 @@ class Input extends Forms
     public function render($markup)
     {
         $indent = self::getIndent();
-        $result = $indent . '<input';
+        $result = "\n" . $indent . '<input';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= ' />' . "\n";
+        $result .= ' />';
         return $result;
     }
 }

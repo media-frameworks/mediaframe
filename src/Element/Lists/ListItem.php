@@ -35,9 +35,6 @@ class ListItem extends Lists
         $result = $indent . '<li';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
-        if (isset ($markup->text)) {
-            $result .= $markup->text;
-        }
         if (strlen($elements)) {
             $result .= "\n" . $elements;
         }

@@ -33,9 +33,6 @@ class UnorderedList extends Lists
         $result = $indent . '<ul';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
-        if (isset ($markup->text)) {
-            $result .= $markup->text;
-        }
         if (strlen($elements)) {
             $result .= "\n" . $elements;
         }

@@ -36,13 +36,13 @@ class Div extends Semantic
     {
         $indent = self::getIndent();
         $elements = parent::renderElements($markup);
-        $result = $indent . '<div';
+        $result = "\n" . $indent . '<div';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
         if (strlen($elements)) {
-            $result .= "\n" . $elements . $indent;
+            $result .= $elements . "\n" . $indent;
         }
-        $result .= '</div>' . "\n";
+        $result .= '</div>';
         return $result;
     }
 }

@@ -24,7 +24,7 @@ class Script extends Code
     {
         $indent = self::getIndent();
         $type = isset ($mark->type) ?: self::DEFAULT_TYPE;
-        $result = $indent . '<script type="' . $type . '"';
+        $result = "\n" . $indent . '<script type="' . $type . '"';
         foreach (self::SUPPORTED_ATTRS as $attr) {
             if (!isset($mark->$attr)) {
                 continue;
@@ -37,7 +37,7 @@ class Script extends Code
 
     private function closeScriptTag()
     {
-        return '</script>' . "\n";
+        return '</script>';
     }
 
     public function render($markup)

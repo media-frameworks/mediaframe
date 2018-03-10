@@ -31,13 +31,13 @@ class Span extends Semantic
     {
         $indent = self::getIndent();
         $elements = parent::renderElements($markup);
-        $result = $indent . '<span';
+        $result = "\n" . $indent . '<span';
         $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
         $result .= '>';
         if (strlen($elements)) {
-            $result .= "\n" . $elements . $indent;
+            $result .= $elements;
         }
-        $result .= '</span>' . "\n";
+        $result .= '</span>';
         return $result;
     }
 }
