@@ -17,10 +17,10 @@ class Head extends Basic
         $indent = self::getIndent();
         $elements = parent::renderElements($script);
         $classes = Stack::renderClasses();
-        $result = $indent . '<head>' . "\n";
+        $result = "\n" . $indent . '<head>' . "\n";
         $result .= $elements;
-        $result .= $classes;
-        $result .= $indent . '</head>' . "\n";
+        $result .= $classes . "\n";
+        $result .= $indent . '</head>';
         return $result;
     }
 

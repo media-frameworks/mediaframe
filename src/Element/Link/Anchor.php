@@ -34,20 +34,15 @@ class Anchor extends Link
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $elements = parent::renderElements($markup);
-        $result = "\n" . $indent . '<a';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        if (strlen($elements)) {
-            $result .= $elements . "\n" . $indent;
-        }
-        $result .= '</a>';
-        return $result;
+        return true;
     }
 
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
+    }
 }
 
 Anchor::initAttrs();

@@ -34,21 +34,14 @@ class IFrame extends Semantic
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $result = $indent . '<iframe';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        if (isset ($markup->text)) {
-            $text = Stack::renderText($markup->text);
-            $result .= $text;
-        }
-        else {
-            $result .= 'iframes are not supported';
-        }
-        $result .= '</iframe>' . "\n";
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 

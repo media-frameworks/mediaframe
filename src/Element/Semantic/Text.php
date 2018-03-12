@@ -15,7 +15,6 @@ class Text extends Semantic
 
     public function render($markup)
     {
-        $indent = self::getIndent();
-        return "\n" . $indent . Stack::renderText($markup);
+        return Stack::renderText($markup);
     }
 }

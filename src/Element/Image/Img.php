@@ -36,13 +36,19 @@ class Img extends Image
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $result = $indent . '<img';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>' . "\n";
-        return $result;
+        return true;
+    }
+
+    public function is_empty()
+    {
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 

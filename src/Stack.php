@@ -47,7 +47,7 @@ class Stack
 
     static function valueSubstitutions($value)
     {
-        if (!is_string($value)){
+        if (!is_string($value)) {
             return $value;
         }
         if (false === strpos($value, '$')) {
@@ -67,7 +67,7 @@ class Stack
                 $lookup = '$' . $part . '$';
                 if (isset(self::$frames[self::$frame_index]->constants[$name])) {
                     $constant_value = self::$frames[self::$frame_index]->constants[$name];
-                    if ($lookup == $value && !is_string($constant_value)){
+                    if ($lookup == $value && !is_string($constant_value)) {
                         return $constant_value;
                     }
                     $found_one = true;
@@ -76,7 +76,7 @@ class Stack
                 }
                 if (isset(self::$frames[self::$frame_index]->vars[$name])) {
                     $var_value = self::$frames[self::$frame_index]->vars[$name];
-                    if ($lookup == $value && !is_string($var_value)){
+                    if ($lookup == $value && !is_string($var_value)) {
                         return $var_value;
                     }
                     $found_one = true;
@@ -205,7 +205,7 @@ class Stack
     {
         $indent = self::getIndent();
         $single_indent = self::getIndent(1);
-        $markup = $indent . $single_indent . '<style type="text/css">' . "\n";
+        $markup = "\n" . $indent . $single_indent . '<style type="text/css">' . "\n";
         $classes = self::$frames[self::$frame_index]->classes;
         foreach ($classes as $name => $class) {
             $dot = '.';
@@ -234,7 +234,7 @@ class Stack
             }
             $markup .= '}' . "\n";
         }
-        $markup .= $indent . $single_indent . '</style>' . "\n";
+        $markup .= $indent . $single_indent . '</style>';
         return $markup;
     }
 

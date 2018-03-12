@@ -27,18 +27,14 @@ class Span extends Semantic
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $elements = parent::renderElements($markup);
-        $result = "\n" . $indent . '<span';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        if (strlen($elements)) {
-            $result .= $elements;
-        }
-        $result .= '</span>';
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 

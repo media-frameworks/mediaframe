@@ -34,7 +34,7 @@ class Link extends Basic
             }
             $result .= ' ' . $attr . '="' . $mark->$attr . '"';
         }
-        return $result . '/>' . "\n";
+        return $result . '/>';
     }
 
     public function render($markup)

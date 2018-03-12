@@ -8,6 +8,8 @@
 
 namespace Mediaframe;
 
+use Mediaframe\Element\Attribute;
+
 abstract class Element
 {
     CONST BASE_CLASS_ELEMENT = 'Mediaframe\Element\\';
@@ -50,7 +52,27 @@ abstract class Element
         $this->tag_name = $tag_name;
     }
 
-    abstract public function render($frame);
+    public function render($frame)
+    {
+        return '';
+    }
+
+    // true if standard element
+    public function auto_render()
+    {
+        return false;
+    }
+
+    // true if no close tag
+    public function is_empty()
+    {
+        return false;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return array();
+    }
 
     static protected function getIndent($add_some = 0)
     {
@@ -58,7 +80,7 @@ abstract class Element
     }
 
     /** @var Element $element */
-    static private function renderElement($element, $markup)
+    static private function renderElement($element, $markup, $tag_name)
     {
         $source = self::renderComments($markup);
         if (is_object($markup)) {
@@ -69,8 +91,23 @@ abstract class Element
                 }
             }
         }
-        $source .= Stack::valueSubstitutions($element->render($markup));
-        return $source;
+        if ($element->auto_render()) {
+            $indent = self::getIndent();
+            $elements = self::renderElements($markup);
+            $source = "\n" . $indent . '<' . $tag_name;
+            $source .= Attribute::renderAttributes($markup, $element->getSupportedAtttributes());
+            if ($element->is_empty()) {
+                $source .= '/>';
+            } else {
+                $formatting = '';
+                if (false !== strpos($elements, "\n")) {
+                    $formatting = "\n" . $indent;
+                }
+                $source .= '>' . $elements . $formatting . '</' . $tag_name . '>';
+            }
+        }
+        $source .= $element->render($markup);
+        return Stack::valueSubstitutions($source);
     }
 
     static public function renderElements($code, $share_frame = false)
@@ -92,13 +129,13 @@ abstract class Element
             Stack::push($frame);
             if (is_array($association)) {
                 foreach ($association as $assoc) {
-                    $source .= self::renderElement($element, $assoc);
+                    $source .= self::renderElement($element, $assoc, $name);
                     if ($share_frame) {
                         Stack::shareFrame();
                     }
                 }
             } else {
-                $source .= self::renderElement($element, $association);
+                $source .= self::renderElement($element, $association, $name);
             }
             if ($share_frame) {
                 Stack::shareFrame();

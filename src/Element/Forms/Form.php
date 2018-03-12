@@ -35,21 +35,15 @@ class Form extends Forms
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $elements = parent::renderElements($markup);
-        $result = "\n" . $indent . '<form';
-        if (!isset($markup->action)) {
-            $markup->action = $_SERVER['REQUEST_URI'];
-        }
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        $result .= $elements;
-        $result .= "\n" . $indent . '</form>';
-        return $result;
+        return true;
     }
 
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
+    }
 }
 
 Form::initAttrs();

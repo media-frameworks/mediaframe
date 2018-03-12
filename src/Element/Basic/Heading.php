@@ -27,16 +27,14 @@ class Heading extends Basic
         self::$supportedAttrs = array_flip(self::$supportedAttrs);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $heading_text = Stack::renderText($markup);
+        return true;
+    }
 
-        $attributes = Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result = $indent . '<' . $this->tag_name . $attributes . '>' . "\n";
-        $result .= $heading_text;
-        $result .= $indent . '</' . $this->tag_name . '>' . "\n";
-        return $result;
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 
 }

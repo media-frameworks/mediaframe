@@ -58,13 +58,14 @@ class Input extends Forms
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $result = "\n" . $indent . '<input';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= ' />';
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 

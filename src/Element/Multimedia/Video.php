@@ -36,22 +36,15 @@ class Video extends Multimedia
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $result = $indent . '<video';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        if (isset ($markup->text)) {
-            $result .= $markup->text;
-        } else {
-            $result .= $indent;
-        }
-        $result .= parent::renderElements($markup);
-        $result .= $indent . '</video>' . "\n";
-        return $result;
+        return true;
     }
 
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
+    }
 }
 
 Video::initAttrs();
