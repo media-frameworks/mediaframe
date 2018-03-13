@@ -4,7 +4,6 @@ namespace Mediaframe\Element\Semantic;
 
 use Mediaframe\Element\Semantic;
 use Mediaframe\Element\Attribute;
-use Mediaframe\Stack;
 
 class IFrame extends Semantic
 {

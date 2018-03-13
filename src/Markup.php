@@ -76,6 +76,7 @@ class Markup
                     } else {
                         $array_name = $name . '->' . $n;
                     }
+                    $frame->constants[$name] = $value;
                     $this->array_notation($frame, $array_name, $v);
                 }
             }
