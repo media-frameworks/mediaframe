@@ -8,12 +8,7 @@ use Mediaframe\Stack;
 
 class Div extends Semantic
 {
-    CONST SUPPORTED_ATTRS = array(
-        "async",
-        "charset",
-        "defer",
-        "src"
-    );
+    CONST SUPPORTED_ATTRS = array();
 
     static private $supportedAttrs = null;
 
