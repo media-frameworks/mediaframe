@@ -20,7 +20,7 @@ class SwitchElement extends Code
         if (!isset($markup->case)) {
             return 'case not set';
         }
-        $value = Stack::valueSubstitutions($markup->value);
+        $value = self::renderElements($markup->value);
         if (isset($markup->case->$value)) {
             return parent::renderElements($markup->case->$value);
         }

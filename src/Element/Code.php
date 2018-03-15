@@ -40,6 +40,7 @@ class Code extends Element
     CONST ELEMENT_CODE_DATA_CLASS = self::BASE_CLASS_CODE . 'Data';
     CONST ELEMENT_CODE_SWITCH_CLASS = self::BASE_CLASS_CODE . 'SwitchElement';
     CONST ELEMENT_CODE_FORLOOP_CLASS = self::BASE_CLASS_CODE . 'ForLoop';
+    CONST ELEMENT_CODE_EVAL_CLASS = self::BASE_CLASS_CODE . 'EvalExpression';
 
     public function __construct($tag_name)
     {
@@ -75,6 +76,7 @@ class Code extends Element
             'data' => self::ELEMENT_CODE_DATA_CLASS,
             'switch' => self::ELEMENT_CODE_SWITCH_CLASS,
             'for' => self::ELEMENT_CODE_FORLOOP_CLASS,
+            'eval' => self::ELEMENT_CODE_EVAL_CLASS,
         );
     }
 
