@@ -18,9 +18,6 @@ class EvalExpression extends Code
         if (!is_string($expression)) {
             $expression = self::renderElements($markup);
         }
-        if (false !== strpos($expression, "'")){
-            $expression = str_replace("'", "''", $expression);
-        }
         return eval('return (' . $expression . ');');
     }
 }
