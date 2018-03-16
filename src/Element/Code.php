@@ -26,8 +26,6 @@ class Code extends Element
     CONST ELEMENT_CODE_INVOKE_CLASS = self::BASE_CLASS_CODE . 'Invoke';
     CONST ELEMENT_CODE_LOG_CLASS = self::BASE_CLASS_CODE . 'Log';
     CONST ELEMENT_CODE_ON_CLASS = self::BASE_CLASS_CODE . 'On';
-    //CONST ELEMENT_CODE_SELECT_CLASS = self::BASE_CLASS_CODE . 'Select';
-    CONST ELEMENT_CODE_QUERY_CLASS = self::BASE_CLASS_CODE . 'Query';
     CONST ELEMENT_CODE_SET_CLASS = self::BASE_CLASS_CODE . 'Set';
     CONST ELEMENT_CODE_CONST_CLASS = self::BASE_CLASS_CODE . 'Constant';
     CONST ELEMENT_CODE_VAR_CLASS = self::BASE_CLASS_CODE . 'Variable';
@@ -61,8 +59,6 @@ class Code extends Element
             'invoke' => self::ELEMENT_CODE_INVOKE_CLASS,
             'log' => self::ELEMENT_CODE_LOG_CLASS,
             'on' => self::ELEMENT_CODE_ON_CLASS,
-            //'select' => self::ELEMENT_CODE_SELECT_CLASS,
-            'query' => self::ELEMENT_CODE_QUERY_CLASS,
             'set' => self::ELEMENT_CODE_SET_CLASS,
             'const' => self::ELEMENT_CODE_CONST_CLASS,
             'var' => self::ELEMENT_CODE_VAR_CLASS,
