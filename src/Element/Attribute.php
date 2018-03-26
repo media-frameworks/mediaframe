@@ -164,7 +164,12 @@ abstract class Attribute extends Element
                 $value = self::renderStyles($value);
             }
             if (self::attrIsBoolean($name)) {
-                $result .= ' ' . $name;
+                if (is_object($value)){
+                    $value = Element::renderElements($value);
+                }
+                if ($value){
+                    $result .= ' ' . $name;
+                }
             } else {
                 if ($attr == 'class') {
                     $value = strtolower($value);

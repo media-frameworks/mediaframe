@@ -89,6 +89,7 @@ class ForeachElement extends Code
             }
             $content .= parent::renderElements(json_decode($markup_str));
         }
+        //var_dump(Stack::$frames[Stack::$frame_index]->constants);
         return $content;
     }
 }
