@@ -19,7 +19,7 @@ class Import extends Code
     {
         $all_lines = explode("\n", $text);
         $result = '';
-        foreach ($all_lines as $line){
+        foreach ($all_lines as $line) {
             $result .= trim($line);
         }
         return $result;
@@ -31,26 +31,34 @@ class Import extends Code
         $script = $markup;
         $strip_newlines = false;
         if (is_object($markup)) {
-            $script = $markup->script;
-            if (isset($markup->strip_newlines)) {
-                $strip_newlines = $markup->strip_newlines;
+            if (isset($markup->script)) {
+                $script = $markup->script;
+                if (isset($markup->strip_newlines)) {
+                    $strip_newlines = $markup->strip_newlines;
+                }
+            } else {
+                $script = Element::renderElements($markup);
             }
         }
         $base_dir = $app_root;
         $script = Stack::valueSubstitutions($script);
-        if (substr($script, 0, 2) == '~/') {
-            $base_dir = '/var/www/html/script';
-            $request_params['script'] = substr($script, 2);
-            $script = $request_params['script'];
+        if (!file_exists($script)) {
+            if (substr($script, 0, 2) == '~/') {
+                $base_dir = '/var/www/html/script';
+                $request_params['script'] = substr($script, 2);
+                $script = $request_params['script'];
+            }
+            if (substr($script, 0, 2) == '!/') {
+                $base_dir = '';
+                $request_params['script'] = substr($script, 1);
+                $script = $request_params['script'];
+            }
+            $full_path = $base_dir . '/' . $script;
+        } else {
+            $full_path = $script;
         }
-        if (substr($script, 0, 2) == '!/') {
-            $base_dir = '';
-            $request_params['script'] = substr($script, 1);
-            $script = $request_params['script'];
-        }
-        $full_path = $base_dir . '/' . $script;
         if (!file_exists($full_path)) {
-            return 'cannot render file: ' . $full_path;
+            return '';
         } else {
             $code = json_decode(file_get_contents($full_path));
             if (isset($markup->params)) {

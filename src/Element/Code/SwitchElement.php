@@ -24,13 +24,9 @@ class SwitchElement extends Code
         if (isset($markup->case->$value)) {
             return parent::renderElements($markup->case->$value);
         }
-        $value = @eval('return (' . $value . ');');
-        if (isset($markup->case->$value)) {
-            return parent::renderElements($markup->case->$value);
-        }
         if (isset($markup->case->default)) {
             return parent::renderElements($markup->case->default);
         }
-        return 'switch error';
+        return '';
     }
 }
