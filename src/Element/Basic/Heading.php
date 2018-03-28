@@ -38,3 +38,5 @@ class Heading extends Basic
     }
 
 }
+
+Heading::initAttrs();
