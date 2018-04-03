@@ -87,7 +87,9 @@ class Markup
         }
         $this->addGlobals($frame);
         Stack::push($frame);
-        return Element::renderElements($code);
+        $markup = Element::renderElements($code);
+        Stack::pop();
+        return $markup;
     }
 
 }
