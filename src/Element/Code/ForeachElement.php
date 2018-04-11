@@ -75,6 +75,7 @@ class ForeachElement extends Code
         $content = '';
         $markup_str = json_encode($markup);
         $foreach_index = 0;
+        Stack::setConstant('foreach::dataset', $dataset);
         foreach ($dataset as $name => $value) {
             Stack::setConstant('foreach::name', $name);
             Stack::setConstant('foreach::value', $value);

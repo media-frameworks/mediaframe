@@ -193,6 +193,7 @@ class Stack
     {
         $known_elements = array(
             'a' => true,
+            'textarea' => true,
             'div' => true,
             'span' => true,
             'table' => true,
