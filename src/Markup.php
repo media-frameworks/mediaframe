@@ -33,10 +33,13 @@ class Markup
         $last_slash = strrpos($script_name, '/index.php');
         $frame->constants['global::mediaframe_root'] = substr($script_name, 0, $last_slash);
 
-        $server_name = $_SERVER['SERVER_NAME'];
-        $frame->constants['global::server_name'] = $_SERVER['REQUEST_SCHEME'] . '://' . $server_name;
-
-        $frame->constants['global::request_method'] = $_SERVER['REQUEST_METHOD'];
+        if (isset($_SERVER['SERVER_NAME'])) {
+            $server_name = $_SERVER['SERVER_NAME'];
+            $frame->constants['global::server_name'] = $_SERVER['REQUEST_SCHEME'] . '://' . $server_name;
+        }
+        if (isset($_SERVER['REQUEST_METHOD'])) {
+            $frame->constants['global::request_method'] = $_SERVER['REQUEST_METHOD'];
+        }
     }
 
     private function array_notation($frame, $base_name, $value)
