@@ -71,7 +71,7 @@ class Code extends Element
             'service' => self::ELEMENT_CODE_SERVICE_CLASS,
             'data' => self::ELEMENT_CODE_DATA_CLASS,
             'switch' => self::ELEMENT_CODE_SWITCH_CLASS,
-            'for' => self::ELEMENT_CODE_FORLOOP_CLASS,
+            'forloop' => self::ELEMENT_CODE_FORLOOP_CLASS,
             'eval' => self::ELEMENT_CODE_EVAL_CLASS,
         );
     }

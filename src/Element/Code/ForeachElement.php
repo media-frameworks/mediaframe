@@ -84,7 +84,9 @@ class ForeachElement extends Code
             if (is_array($value) || is_object($value)) {
                 $index = 0;
                 foreach ($value as $n => $v) {
-                    Stack::setConstant('foreach::' . $n, (string)$v);
+                    if (!is_object($v) && !is_array($v)){
+                        Stack::setConstant('foreach::' . $n, (string)$v);
+                    }
                     Stack::setConstant('foreach::' . $index++, $n);
                 }
             }

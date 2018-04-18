@@ -38,16 +38,14 @@ class Button extends Forms
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $elements = parent::renderElements($markup);
-        $result = $indent . '<button';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        $result .= $elements;
-        $result .= '</button>' . "\n";
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 
