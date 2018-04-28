@@ -29,18 +29,14 @@ class Label extends Forms
         parent::__construct($tag_name);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $indent = self::getIndent();
-        $elements = parent::renderElements($markup);
-        $result = $indent . '<label';
-        $result .= Attribute::renderAttributes($markup, self::$supportedAttrs);
-        $result .= '>';
-        if (isset ($markup->text)) {
-            $result .= $markup->text;
-        }
-        $result .= '</label>' . "\n";
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 }
 
