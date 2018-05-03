@@ -69,8 +69,8 @@ class ForeachElement extends Code
                 $dataset = self::csv_to_array(Stack::valueSubstitutions($markup->csv_file));
             }
         }
-        if (!$dataset) {
-            return 'foreach dataset not defined';
+        if (null === $dataset) {
+            return '';
         }
         $content = '';
         $markup_str = json_encode($markup);
