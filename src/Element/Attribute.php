@@ -183,7 +183,7 @@ abstract class Attribute extends Element
                 if ($attr == 'class') {
                     $value = strtolower($value);
                 }
-                $result .= ' ' . self::transformAttr($attr) . '="' . $value . '"';
+                $result .= ' ' . self::transformAttr($attr) . '="' . str_replace('"', '&quot;', $value) . '"';
             }
         }
         return $result;
