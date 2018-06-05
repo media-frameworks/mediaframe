@@ -73,7 +73,6 @@ class ForeachElement extends Code
             return '';
         }
         $content = '';
-        $markup_str = json_encode($markup);
         $foreach_index = 0;
         Stack::setConstant('foreach::dataset', $dataset);
         foreach ($dataset as $name => $value) {
@@ -90,9 +89,8 @@ class ForeachElement extends Code
                     Stack::setConstant('foreach::' . $index++, $n);
                 }
             }
-            $content .= parent::renderElements(json_decode($markup_str));
+            $content .= parent::renderElements($markup);
         }
-        //var_dump(Stack::$frames[Stack::$frame_index]->constants);
         return $content;
     }
 }
