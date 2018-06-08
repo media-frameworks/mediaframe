@@ -90,6 +90,15 @@ class ForeachElement extends Code
                 }
             }
             $content .= parent::renderElements($markup);
+            if (is_array($value) || is_object($value)) {
+                $index = 0;
+                foreach ($value as $n => $v) {
+                    if (!is_object($v) && !is_array($v)){
+                        Stack::unsetConstant('foreach::' . $n, (string)$v);
+                    }
+                    Stack::unsetConstant('foreach::' . $index++, $n);
+                }
+            }
         }
         return $content;
     }

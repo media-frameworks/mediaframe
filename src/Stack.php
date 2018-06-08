@@ -95,6 +95,10 @@ class Stack
         }
         self::$frames[self::$frame_index]->constants[strtolower($name)] = $value;
     }
+    static public function unsetConstant($name)
+    {
+        unset(self::$frames[self::$frame_index]->constants[$name]);
+    }
 
     static public function setVar($name, $value)
     {
