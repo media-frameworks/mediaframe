@@ -61,10 +61,12 @@ class Invoke extends Code
                     if (isset($macro->var)){
                         unset($macro->var->$name);
                     }
+                    $value = Stack::valueSubstitutions($value);
                     Stack::setVar($name, Element::renderElements($value));
                 }
             }
         }
+        Stack::shareFrame();
         return Element::renderElements($macro);
     }
 

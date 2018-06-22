@@ -81,22 +81,20 @@ class ForeachElement extends Code
             Stack::setConstant('foreach::index', $foreach_index++);
             Stack::setConstant('foreach::' . $name, $value);
             if (is_array($value) || is_object($value)) {
-                $index = 0;
                 foreach ($value as $n => $v) {
-                    if (!is_object($v) && !is_array($v)){
+                    if (!is_object($v) && !is_array($v)) {
                         Stack::setConstant('foreach::' . $n, (string)$v);
+                    } else {
+                        Stack::setConstant('foreach::' . $n, $v);
                     }
-                    Stack::setConstant('foreach::' . $index++, $n);
                 }
             }
             $content .= parent::renderElements($markup);
             if (is_array($value) || is_object($value)) {
-                $index = 0;
                 foreach ($value as $n => $v) {
-                    if (!is_object($v) && !is_array($v)){
+                    if (!is_object($v) && !is_array($v)) {
                         Stack::unsetConstant('foreach::' . $n, (string)$v);
                     }
-                    Stack::unsetConstant('foreach::' . $index++, $n);
                 }
             }
         }

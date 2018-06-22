@@ -117,7 +117,7 @@ abstract class Element
             return Stack::valueSubstitutions($code);
         }
         if (!is_object($code)) {
-            return $source;
+            return $code;
         }
         foreach ($code as $name => $association) {
             /** @var Element $element */

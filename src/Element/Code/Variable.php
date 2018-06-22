@@ -23,7 +23,7 @@ class Variable extends Code
                     Stack::setVar($name, $_x);
                 }
             }
-            Stack::setVar($name, $value);
+            Stack::setVar($name, Stack::valueSubstitutions($value));
         }
         Stack::shareFrame();
         return '';

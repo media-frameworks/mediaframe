@@ -95,6 +95,7 @@ class Stack
         }
         self::$frames[self::$frame_index]->constants[strtolower($name)] = $value;
     }
+
     static public function unsetConstant($name)
     {
         unset(self::$frames[self::$frame_index]->constants[$name]);
@@ -102,19 +103,10 @@ class Stack
 
     static public function setVar($name, $value)
     {
-        $name = strtolower($name);
-        for ($i = 0; $i < self::$frame_index; $i++) {
-            if (isset(self::$frames[$i]->vars[$name])) {
-                self::$frames[$i]->vars[$name] = $value;
-            }
+        if (!is_string($value) && (!is_numeric($value))) {
+            $value = Element::renderElements($value);
         }
-        if (is_object($value) || is_array($value)) {
-            foreach ($value as $n => $v) {
-                self::$frames[self::$frame_index]->vars[$name . ':' . strtolower($n)] = $v;
-            }
-        } else {
-            self::$frames[self::$frame_index]->vars[$name] = $value;
-        }
+        self::$frames[self::$frame_index]->vars[strtolower($name)] = $value;
     }
 
     static public function unsetVar($name)
