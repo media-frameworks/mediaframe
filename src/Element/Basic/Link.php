@@ -12,6 +12,7 @@ class Link extends Basic
         "crossorigin",
         "href",
         "hreflang",
+        "integrity",
         "media",
         "sizes",
         "type",
@@ -45,6 +46,7 @@ class Link extends Basic
                 $mark = $markup;
                 $mark->href = $href;
                 $result .= $this->createLink($mark);
+                $result .= "\n";
             }
         } else {
             $result .= $this->createLink($markup);
