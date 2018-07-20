@@ -3,6 +3,7 @@
 namespace Mediaframe\Element\Basic;
 
 use Mediaframe\Element\Basic;
+use Mediaframe\Element\Attribute;
 
 class Link extends Basic
 {
@@ -17,41 +18,33 @@ class Link extends Basic
         "sizes",
         "type",
     );
+    static private $supportedAttrs = null;
 
     public function __construct($tag_name)
     {
         parent::__construct($tag_name);
     }
 
-    private function createLink($mark)
+    static public function initAttrs()
     {
-        $indent = self::getIndent();
-        $rel = isset ($mark->rel) ?: self::DEFAULT_REL;
-        $type = isset ($mark->type) ?: self::DEFAULT_TYPE;
-        $result = $indent . '<link type="' . $type . '" rel="' . $rel . '"';
-        foreach (self::SUPPORTED_ATTRS as $attr) {
-            if (!isset($mark->$attr)) {
-                continue;
-            }
-            $result .= ' ' . $attr . '="' . $mark->$attr . '"';
-        }
-        return $result . '/>';
+        self::$supportedAttrs = array_merge(
+            self::SUPPORTED_ATTRS,
+            Attribute::GLOBAL_ATTRS,
+            Attribute::EVENT_ATTRS
+        );
+        self::$supportedAttrs = array_flip(self::$supportedAttrs);
     }
 
-    public function render($markup)
+    public function auto_render()
     {
-        $result = '';
-        if (is_array($markup->href)) {
-            foreach ($markup->href as $href) {
-                $mark = $markup;
-                $mark->href = $href;
-                $result .= $this->createLink($mark);
-                $result .= "\n";
-            }
-        } else {
-            $result .= $this->createLink($markup);
-        }
-        return $result;
+        return true;
+    }
+
+    public function getSupportedAtttributes()
+    {
+        return self::$supportedAttrs;
     }
 
 }
+
+Link::initAttrs();
