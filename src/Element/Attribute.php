@@ -130,6 +130,7 @@ abstract class Attribute extends Element
             case 'controls':
             case 'checked':
             case 'disabled':
+            case 'multiple':
             case 'formnovalidate':
             case 'required':
                 return true;

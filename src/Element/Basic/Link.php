@@ -15,6 +15,7 @@ class Link extends Basic
         "hreflang",
         "integrity",
         "media",
+        "rel",
         "sizes",
         "type",
     );
