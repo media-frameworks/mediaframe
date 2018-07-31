@@ -181,6 +181,9 @@ abstract class Attribute extends Element
                         break;
                 }
             } else {
+                if (is_object($value)){
+                    $value = Element::renderElements($value);
+                }
                 if ($attr == 'class') {
                     $value = strtolower($value);
                 }
