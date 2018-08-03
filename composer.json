@@ -19,7 +19,7 @@
       "type": "package",
       "package": {
         "name": "mediaframe",
-        "version": "1.0",
+        "version": "dev",
         "source": {
           "url": "https://github.com/media-frameworks/mediaframe.git",
           "type": "git",
