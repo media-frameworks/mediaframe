@@ -92,7 +92,7 @@ class Markup
         Stack::push($frame);
         $markup = Element::renderElements($code);
         Stack::pop();
-        return $markup;
+        return $markup . "\n" . '<!-- markup by mediaframe -->';
     }
 
 }
