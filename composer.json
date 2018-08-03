@@ -1,5 +1,5 @@
 {
-  "name": "mediaframe",
+  "name": "media-frameworks/mediaframe",
   "description": "JSON-formatted markup rendering engine",
   "type": "library",
   "minimum-stability": "dev",
