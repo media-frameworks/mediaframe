@@ -9,12 +9,27 @@
       "email": "mikehallvideo@gmail.com"
     }
   ],
-  "require": {
-    "php": ">=5.6.0"
-  },
   "autoload": {
     "classmap": [
       "/"
     ]
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "mediaframe",
+        "version": "1.0",
+        "source": {
+          "url": "https://github.com/media-frameworks/mediaframe.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  ],
+  "require": {
+    "example-package-name": "1.0",
+    "php": ">=5.6.0"
   }
 }

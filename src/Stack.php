@@ -206,7 +206,7 @@ class Stack
         $classes = self::$frames[self::$frame_index]->classes;
         foreach ($classes as $name => $class) {
             $dot = '.';
-            if (false != strpos($name, '::')) {
+            if (false !== strpos($name, '::')) {
                 list($element, $qualifier) = explode('::', $name);
                 if ('' == $qualifier) {
                     $name = $element;
