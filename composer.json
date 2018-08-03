@@ -19,7 +19,7 @@
       "type": "package",
       "package": {
         "name": "media-frameworks/mediaframe",
-        "version": "1.0",
+        "version": "dev",
         "source": {
           "url": "https://github.com/media-frameworks/mediaframe.git",
           "type": "git",
@@ -29,7 +29,7 @@
     }
   ],
   "require": {
-    "media-frameworks/mediaframe": "1.0",
+    "media-frameworks/mediaframe": "@dev",
     "php": ">=5.6.0"
   }
 }
