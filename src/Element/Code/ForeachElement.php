@@ -76,7 +76,6 @@ class ForeachElement extends Code
         $foreach_index = 0;
         Stack::setConstant('foreach::dataset', $dataset);
         foreach ($dataset as $name => $value) {
-            $start_time = microtime(true);
             Stack::setConstant('foreach::name', $name);
             Stack::setConstant('foreach::value', $value);
             Stack::setConstant('foreach::index', $foreach_index++);
@@ -98,8 +97,6 @@ class ForeachElement extends Code
                     }
                 }
             }
-            $end_time = microtime(true);
-            $content .= "\n" . '<!-- loop took ' . ($end_time - $start_time) . 's -->';
         }
         return $content;
     }
