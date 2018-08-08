@@ -5,6 +5,8 @@ namespace Mediaframe\Element\Code;
 use Mediaframe\Element\Code;
 use Mediaframe\Stack;
 
+ini_set('memory_limit', '4G');
+
 class ForeachElement extends Code
 {
 
