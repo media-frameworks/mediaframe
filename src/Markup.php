@@ -74,9 +74,6 @@ class Markup
                 $value = urldecode($value);
                 $frame->constants[$name] = $value;
             } else {
-                if (is_array($value) && count($value) > 100){
-                    continue;
-                }
                 foreach ($value as $n => $v) {
                     if (is_array($value)) {
                         $array_name = $name . '[' . $n . ']';
