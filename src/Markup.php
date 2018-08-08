@@ -59,6 +59,7 @@ class Markup
 
     public function render()
     {
+        $start_time = microtime(true);
         if (!file_exists($this->script_path)) {
             return "\n" . 'error, script "' . $this->script_path . '" is missing';
         }
@@ -92,7 +93,9 @@ class Markup
         Stack::push($frame);
         $markup = Element::renderElements($code);
         Stack::pop();
-        return $markup . "\n" . '<!-- markup by mediaframe -->';
+        $end_time = microtime(true);
+        $total_time = $end_time - $start_time;
+        return $markup . "\n" . '<!-- markup by mediaframe in ' . $total_time . 's. -->';
     }
 
 }
