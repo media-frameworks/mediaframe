@@ -74,7 +74,7 @@ class ForeachElement extends Code
         if (null === $dataset) {
             return '';
         }
-        $content = '';
+        $content = array();
         $foreach_index = 0;
         Stack::setConstant('foreach::dataset', $dataset);
         foreach ($dataset as $name => $value) {
@@ -91,7 +91,7 @@ class ForeachElement extends Code
                     }
                 }
             }
-            $content .= parent::renderElements($markup);
+            $content[] = parent::renderElements($markup);
             if (is_array($value) || is_object($value)) {
                 foreach ($value as $n => $v) {
                     if (!is_object($v) && !is_array($v)) {
@@ -100,6 +100,6 @@ class ForeachElement extends Code
                 }
             }
         }
-        return $content;
+        return implode("", $content);
     }
 }
