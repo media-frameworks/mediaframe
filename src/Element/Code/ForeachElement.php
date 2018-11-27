@@ -76,11 +76,15 @@ class ForeachElement extends Code
         }
         $content = array();
         $foreach_index = 0;
+        $foreach_count = count($dataset);
         Stack::setConstant('foreach::dataset', $dataset);
         foreach ($dataset as $name => $value) {
             Stack::setConstant('foreach::name', $name);
             Stack::setConstant('foreach::value', $value);
             Stack::setConstant('foreach::index', $foreach_index++);
+            if ($foreach_index == $foreach_count) {
+                Stack::setConstant('foreach::final', 1);
+            }
             Stack::setConstant('foreach::' . $name, $value);
             if (is_array($value) || is_object($value)) {
                 foreach ($value as $n => $v) {
