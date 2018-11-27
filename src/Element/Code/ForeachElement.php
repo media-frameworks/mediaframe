@@ -82,6 +82,7 @@ class ForeachElement extends Code
             Stack::setConstant('foreach::name', $name);
             Stack::setConstant('foreach::value', $value);
             Stack::setConstant('foreach::index', $foreach_index++);
+            Stack::setConstant('foreach::final', 0);
             if ($foreach_index == $foreach_count) {
                 Stack::setConstant('foreach::final', 1);
             }
