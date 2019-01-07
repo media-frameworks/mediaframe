@@ -38,6 +38,8 @@ class Input extends Forms
         "step",
         "type",
         "value",
+        "serialize", // invented
+        "tojson", // invented
         "width"
     );
 

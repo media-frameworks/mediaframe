@@ -184,8 +184,16 @@ abstract class Attribute extends Element
                 if (is_object($value)){
                     $value = Element::renderElements($value);
                 }
-                if ($attr == 'class') {
-                    $value = strtolower($value);
+                switch($attr) {
+                    case 'class':
+                        $value = strtolower($value);
+                        break;
+                    case 'serialize':
+                        $value = serialize($value);
+                        break;
+                    case 'tojson':
+                        $value = json_encode($value);
+                        break;
                 }
                 $result .= ' ' . self::transformAttr($attr) . '="' . str_replace('"', '&quot;', $value) . '"';
             }
