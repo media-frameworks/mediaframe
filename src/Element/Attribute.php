@@ -190,9 +190,11 @@ abstract class Attribute extends Element
                         break;
                     case 'serialize':
                         $value = serialize($value);
+                        $attr = 'value';
                         break;
                     case 'tojson':
                         $value = json_encode($value);
+			$attr = 'value';
                         break;
                 }
                 $result .= ' ' . self::transformAttr($attr) . '="' . str_replace('"', '&quot;', $value) . '"';
