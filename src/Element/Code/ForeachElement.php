@@ -73,9 +73,9 @@ class ForeachElement extends Code
             return '';
         }
         $prefix = 'foreach';
-        if (isset($markup->prefix)){
-            $prefix = $markup->prefix;            
-        }
+        //if (isset($markup->prefix)){
+        //    $prefix = $markup->prefix;            
+        //}
         $content = array();
         $foreach_index = 0;
         $foreach_count = count($dataset);
