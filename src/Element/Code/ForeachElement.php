@@ -74,6 +74,10 @@ class ForeachElement extends Code
         if (null === $dataset) {
             return '';
         }
+        if (!is_array($dataset) && !is_object($dataset)){
+            var_dump($markup);
+            return '[foreach dataset error]';
+        }
         $prefix = 'foreach';
         if (isset($markup->prefix)){
             $prefix = $markup->prefix;            
