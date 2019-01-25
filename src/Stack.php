@@ -243,6 +243,12 @@ class Stack
         return Element::renderElements($markup);
     }
 
+
+static function renderToJson($markup)
+{
+    return json_encode($markup);
+}
+
     static function push($frame)
     {
         if (self::$frame_index >= 0) {

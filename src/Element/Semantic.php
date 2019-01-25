@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mike
- * Date: 9/24/2017
- * Time: 9:48 AM
- */
 
 namespace Mediaframe\Element;
 
@@ -28,6 +22,7 @@ class Semantic extends Element
     CONST ELEMENT_SEMANTIC_LOCATION_CLASS = self::BASE_CLASS_SEMANTIC . 'Location';
     CONST ELEMENT_SEMANTIC_IFRAME_CLASS = self::BASE_CLASS_SEMANTIC . 'IFrame';
     CONST ELEMENT_SEMANTIC_TEXT_CLASS = self::BASE_CLASS_SEMANTIC . 'Text';
+    CONST ELEMENT_SEMANTIC_TOJSON_CLASS = self::BASE_CLASS_SEMANTIC . 'ToJson';
 
     public function __construct($tag_name)
     {
@@ -51,6 +46,7 @@ class Semantic extends Element
             'location' => self::ELEMENT_SEMANTIC_LOCATION_CLASS,
             'iframe' => self::ELEMENT_SEMANTIC_IFRAME_CLASS,
             'text' => self::ELEMENT_SEMANTIC_TEXT_CLASS,
+            'tojson' => self::ELEMENT_SEMANTIC_TOJSON_CLASS,
         );
     }
 
