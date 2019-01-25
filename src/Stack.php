@@ -243,11 +243,10 @@ class Stack
         return Element::renderElements($markup);
     }
 
-
-static function renderToJson($markup)
-{
-    return json_encode($markup);
-}
+    static function renderToJson($markup)
+    {
+        return json_encode(self::valueSubstitutions($markup));
+    }
 
     static function push($frame)
     {
@@ -270,3 +269,4 @@ static function renderToJson($markup)
         return $frame;
     }
 }
+
