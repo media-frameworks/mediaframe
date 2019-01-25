@@ -18,7 +18,8 @@ class VarDump extends Code
         if (!is_string($expression)) {
             $expression = self::renderElements($markup);
         }
-        return eval('return var_dump(' . $expression . ');');
+        var_dump($expression);
+        return '';
     }
 }
 
