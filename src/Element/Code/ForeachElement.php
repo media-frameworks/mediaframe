@@ -1,6 +1,4 @@
-<?php
-
-namespace Mediaframe\Element\Code;
+mespace Mediaframe\Element\Code;
 
 use Mediaframe\Element\Code;
 use Mediaframe\Stack;
@@ -74,25 +72,29 @@ class ForeachElement extends Code
         if (null === $dataset) {
             return '';
         }
+        $prefix = 'foreach';
+        if (isset($markup->prefix)){
+            $prefix = $markup->prefix;            
+        }
         $content = array();
         $foreach_index = 0;
         $foreach_count = count($dataset);
-        Stack::setConstant('foreach::dataset', $dataset);
+        Stack::setConstant($prefix . '::dataset', $dataset);
         foreach ($dataset as $name => $value) {
-            Stack::setConstant('foreach::name', $name);
-            Stack::setConstant('foreach::value', $value);
-            Stack::setConstant('foreach::index', $foreach_index++);
-            Stack::setConstant('foreach::final', 0);
+            Stack::setConstant($prefix . '::name', $name);
+            Stack::setConstant($prefix . '::value', $value);
+            Stack::setConstant($prefix . '::index', $foreach_index++);
+            Stack::setConstant($prefix . '::final', 0);
             if ($foreach_index == $foreach_count) {
-                Stack::setConstant('foreach::final', 1);
+                Stack::setConstant($prefix . '::final', 1);
             }
-            Stack::setConstant('foreach::' . $name, $value);
+            Stack::setConstant($prefix . '::' . $name, $value);
             if (is_array($value) || is_object($value)) {
                 foreach ($value as $n => $v) {
                     if (!is_object($v) && !is_array($v)) {
-                        Stack::setConstant('foreach::' . $n, (string)$v);
+                        Stack::setConstant($prefix . '::' . $n, (string)$v);
                     } else {
-                        Stack::setConstant('foreach::' . $n, $v);
+                        Stack::setConstant($prefix . '::' . $n, $v);
                     }
                 }
             }
@@ -100,7 +102,7 @@ class ForeachElement extends Code
             if (is_array($value) || is_object($value)) {
                 foreach ($value as $n => $v) {
                     if (!is_object($v) && !is_array($v)) {
-                        Stack::unsetConstant('foreach::' . $n, (string)$v);
+                        Stack::unsetConstant($prefix . '::' . $n, (string)$v);
                     }
                 }
             }
@@ -108,3 +110,4 @@ class ForeachElement extends Code
         return implode("", $content);
     }
 }
+
