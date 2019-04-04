@@ -80,7 +80,7 @@ class Import extends Code
         $script_dir = Stack::getConstant('local::script_dir');
         Stack::setConstant('local::script_dir', dirname($full_path));
         $rendered = Element::renderElements($code, true);
-        Stack::setConstant('local::script_dir', $script_dir;
+        Stack::setConstant('local::script_dir', $script_dir);
 
         if ($strip_newlines) {
             $rendered = $this->strip_newlines($rendered);
