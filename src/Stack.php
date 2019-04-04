@@ -22,7 +22,7 @@ class Stack
 
     static public $frames = array();
     static public $frame_index = -1;
-    static public $offset_indent = 0;
+    static public $offset_indent = 3;
 
     CONST SPACE_CHARS = '                                                                                                 ';
 
@@ -35,7 +35,7 @@ class Stack
     static public function getIndent($count = 0)
     {
         if ($count == 0) {
-            $count = count(self::$frames) - 2;
+            $count = count(self::$frames) - self::$offset_indent;
         }
         return substr(self::SPACE_CHARS, 0, $count * 3);
     }

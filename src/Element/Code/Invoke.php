@@ -81,6 +81,9 @@ class Invoke extends Code
         if (!isset($markup->name)) {
             return 'macro name not set';
         }
-        return $this->invokeMacro($markup->name, $markup);
+        Stack::offsetIndent(1);
+        $result = $this->invokeMacro($markup->name, $markup);
+        Stack::offsetIndent(-1);
+        return $result;
     }
 }
