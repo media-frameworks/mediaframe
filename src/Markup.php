@@ -21,27 +21,6 @@ class Markup
         $this->app_name = $app_name;
     }
 
-    public function addGlobals(&$frame)
-    {
-        $filesystem_root = $_SERVER['SCRIPT_FILENAME'];
-        $last_slash = strrpos($filesystem_root, '/');
-        $frame->constants['global::filesystem_root'] = substr($filesystem_root, 0, $last_slash);
-        $frame->constants['global::web_root'] = '/var/www/html';
-        $frame->constants['global::app_root'] = $frame->constants['global::web_root'] . '/app/' . $this->app_name;
-
-        $script_name = $_SERVER['SCRIPT_NAME'];
-        $last_slash = strrpos($script_name, '/index.php');
-        $frame->constants['global::mediaframe_root'] = substr($script_name, 0, $last_slash);
-
-        if (isset($_SERVER['SERVER_NAME'])) {
-            $server_name = $_SERVER['SERVER_NAME'];
-            $frame->constants['global::server_name'] = $_SERVER['REQUEST_SCHEME'] . '://' . $server_name;
-        }
-        if (isset($_SERVER['REQUEST_METHOD'])) {
-            $frame->constants['global::request_method'] = $_SERVER['REQUEST_METHOD'];
-        }
-    }
-
     private function array_notation($frame, $base_name, $value)
     {
         if (is_array($value) || is_object($value)) {
@@ -68,6 +47,7 @@ class Markup
             return false;
         }
         $frame = new Stack("first", '{}');
+        Stack::setConstant('local::script_dir', dirname($this->script_path));
         foreach ($this->request_params as $name => $value) {
             $name = urldecode($name);
             if (!is_array($value) && !is_object($value)) {
@@ -89,7 +69,6 @@ class Markup
             $frame->constants['post::' . urldecode($name)] = urldecode($value);
             $frame->constants[urldecode($name)] = urldecode($value);
         }
-        $this->addGlobals($frame);
         Stack::push($frame);
         $markup = Element::renderElements($code);
         Stack::pop();
