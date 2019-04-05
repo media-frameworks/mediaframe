@@ -63,6 +63,11 @@ abstract class Element
         return false;
     }
 
+    // true if the element causes HTML to indent
+    public function render_indent(){
+        return true;
+    }
+
     // true if no close tag
     public function is_empty()
     {
@@ -91,6 +96,9 @@ abstract class Element
                 }
             }
         }
+        if (!$element->render_indent) {
+            Stack::offsetIndent(1);
+        }
         if ($element->auto_render()) {
             $indent = self::getIndent();
             $elements = self::renderElements($markup);
@@ -107,6 +115,9 @@ abstract class Element
             }
         }
         $source .= $element->render($markup);
+        if (!$element->render_indent) {
+            Stack::offsetIndent(-1);
+        }
         return Stack::valueSubstitutions($source);
     }
 

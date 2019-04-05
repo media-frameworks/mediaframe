@@ -40,6 +40,11 @@ class Form extends Forms
         return true;
     }
 
+    public function render_indent()
+    {
+        return false;
+    }
+
     public function getSupportedAtttributes()
     {
         return self::$supportedAttrs;
