@@ -16,7 +16,7 @@ class ForLoop extends Code
     {
         return false;
     }
-    
+
     public function render($markup)
     {
         $content = '';
