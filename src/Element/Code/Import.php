@@ -25,6 +25,11 @@ class Import extends Code
         return $result;
     }
 
+    public function render_indent()
+    {
+        return false;
+    }
+
     public function render($markup)
     {
         $app_root = Stack::getConstant('global::app_root');
@@ -79,9 +84,7 @@ class Import extends Code
         // set the new script dir and then restore it
         $script_dir = Stack::getConstant('local::script_dir');
         Stack::setConstant('local::script_dir', dirname($full_path));
-        Stack::offsetIndent(1);
         $rendered = Element::renderElements($code, true);
-        Stack::offsetIndent(-1);
         Stack::setConstant('local::script_dir', $script_dir);
 
         if ($strip_newlines) {
