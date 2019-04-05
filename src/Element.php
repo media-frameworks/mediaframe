@@ -96,7 +96,7 @@ abstract class Element
                 }
             }
         }
-        if (!$element->render_indent) {
+        if (!$element->render_indent()) {
             Stack::offsetIndent(1);
         }
         if ($element->auto_render()) {
@@ -115,7 +115,7 @@ abstract class Element
             }
         }
         $source .= $element->render($markup);
-        if (!$element->render_indent) {
+        if (!$element->render_indent()) {
             Stack::offsetIndent(-1);
         }
         return Stack::valueSubstitutions($source);
