@@ -16,7 +16,6 @@ class Title extends Basic
     {
         $indent = self::getIndent($title);
         $title_text = Stack::renderText($title);
-        return $indent . '<title>' . $title_text . '</title>' . "\n";
+        return $indent . '<title>' . $title_text . '</title>';
     }
-
 }

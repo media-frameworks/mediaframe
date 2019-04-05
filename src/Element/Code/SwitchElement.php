@@ -22,10 +22,16 @@ class SwitchElement extends Code
         }
         $value = (string)self::renderElements($markup->value);
         if (isset($markup->case->$value)) {
-            return parent::renderElements($markup->case->$value);
+            Stack::offsetIndent(1);
+            $result = parent::renderElements($markup->case->$value);
+            Stack::offsetIndent(-1);
+            return $result;
         }
         if (isset($markup->case->default)) {
-            return parent::renderElements($markup->case->default);
+            Stack::offsetIndent(1);
+            $result = parent::renderElements($markup->case->default);
+            Stack::offsetIndent(-1);
+            return $result;
         }
         return '';
     }
