@@ -86,6 +86,7 @@ class ForeachElement extends Code
         $foreach_index = 0;
         $foreach_count = count($dataset);
         Stack::setConstant($prefix . '::dataset', $dataset);
+        Stack::offsetIndent(1);
         foreach ($dataset as $name => $value) {
             Stack::setConstant($prefix . '::name', $name);
             Stack::setConstant($prefix . '::value', $value);
@@ -113,6 +114,7 @@ class ForeachElement extends Code
                 }
             }
         }
+        Stack::offsetIndent(-1);
         return implode("", $content);
     }
 }
