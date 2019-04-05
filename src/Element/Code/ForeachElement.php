@@ -46,6 +46,11 @@ class ForeachElement extends Code
         return $rows;
     }
 
+    public function render_indent()
+    {
+        return false;
+    }
+
     public function render($markup)
     {
         $dataset = null;
@@ -74,19 +79,18 @@ class ForeachElement extends Code
         if (null === $dataset) {
             return '';
         }
-        if (!is_array($dataset) && !is_object($dataset)){
+        if (!is_array($dataset) && !is_object($dataset)) {
             var_dump($markup);
             return '[foreach dataset error]';
         }
         $prefix = 'foreach';
-        if (isset($markup->prefix)){
-            $prefix = $markup->prefix;            
+        if (isset($markup->prefix)) {
+            $prefix = $markup->prefix;
         }
         $content = array();
         $foreach_index = 0;
         $foreach_count = count($dataset);
         Stack::setConstant($prefix . '::dataset', $dataset);
-        Stack::offsetIndent(1);
         foreach ($dataset as $name => $value) {
             Stack::setConstant($prefix . '::name', $name);
             Stack::setConstant($prefix . '::value', $value);
@@ -114,7 +118,6 @@ class ForeachElement extends Code
                 }
             }
         }
-        Stack::offsetIndent(-1);
         return implode("", $content);
     }
 }

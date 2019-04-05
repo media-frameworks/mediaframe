@@ -12,6 +12,11 @@ class ForLoop extends Code
         parent::__construct($tag_name);
     }
 
+    public function render_indent()
+    {
+        return false;
+    }
+    
     public function render($markup)
     {
         $content = '';

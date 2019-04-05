@@ -24,6 +24,11 @@ class Invoke extends Code
         return implode($markup->delimiter, $markup->pieces);
     }
 
+    public function render_indent()
+    {
+        return false;
+    }
+
     private function invokeMailService($markup)
     {
         if (!isset($markup->to) || !isset($markup->subject) || !isset($markup->message) || !isset($markup->headers)) {
@@ -58,7 +63,7 @@ class Invoke extends Code
         if ($markup != null) {
             if (isset($markup->var)) {
                 foreach ($markup->var as $name => $value) {
-                    if (isset($macro->var)){
+                    if (isset($macro->var)) {
                         unset($macro->var->$name);
                     }
                     $value = Stack::valueSubstitutions($value);
@@ -81,9 +86,7 @@ class Invoke extends Code
         if (!isset($markup->name)) {
             return 'macro name not set';
         }
-        Stack::offsetIndent(1);
         $result = $this->invokeMacro($markup->name, $markup);
-        Stack::offsetIndent(-1);
         return $result;
     }
 }
