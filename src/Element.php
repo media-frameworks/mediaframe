@@ -64,7 +64,8 @@ abstract class Element
     }
 
     // true if the element causes HTML to indent
-    public function render_indent(){
+    public function render_indent()
+    {
         return true;
     }
 
@@ -99,6 +100,8 @@ abstract class Element
         if (!$element->render_indent()) {
             Stack::offsetIndent(1);
         }
+        $indent_offset = $markup->indent_offset;
+        Stack::offsetIndent(-1 * $indent_offset);
         if ($element->auto_render()) {
             $indent = self::getIndent();
             $elements = self::renderElements($markup);
@@ -115,6 +118,7 @@ abstract class Element
             }
         }
         $source .= $element->render($markup);
+        Stack::offsetIndent($indent_offset);
         if (!$element->render_indent()) {
             Stack::offsetIndent(-1);
         }
