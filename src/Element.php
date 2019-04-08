@@ -100,7 +100,7 @@ abstract class Element
         if (!$element->render_indent()) {
             Stack::offsetIndent(1);
         }
-        $indent_offset = is_object($markup) ? $markup->indent_offset : 0;
+        $indent_offset = 0;
         Stack::offsetIndent(-1 * $indent_offset);
         if ($element->auto_render()) {
             $indent = self::getIndent();
