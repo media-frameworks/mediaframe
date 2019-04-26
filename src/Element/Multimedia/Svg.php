@@ -7,14 +7,19 @@ use Mediaframe\Element\Attribute;
 
 class Svg extends Multimedia
 {
-    CONST SUPPORTED_ATTRS = array();
+    CONST SUPPORTED_ATTRS = array(
+        "width",
+        "height",
+    );
 
     static private $supportedAttrs = null;
 
     static public function initAttrs()
     {
         self::$supportedAttrs = array_merge(
-            Attribute::GLOBAL_ATTRS
+            self::SUPPORTED_ATTRS,
+            Attribute::GLOBAL_ATTRS,
+            Attribute::EVENT_ATTRS
         );
         self::$supportedAttrs = array_flip(self::$supportedAttrs);
     }
