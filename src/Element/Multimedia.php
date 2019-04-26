@@ -18,6 +18,7 @@ class Multimedia extends Element
     CONST ELEMENT_MULTIMEDIA_SOURCE_CLASS = self::BASE_CLASS_MULTIMEDIA . 'Source';
     CONST ELEMENT_MULTIMEDIA_TRACK_CLASS = self::BASE_CLASS_MULTIMEDIA . 'Track';
     CONST ELEMENT_MULTIMEDIA_VIDEO_CLASS = self::BASE_CLASS_MULTIMEDIA . 'Video';
+    CONST ELEMENT_MULTIMEDIA_SVG_CLASS = self::BASE_CLASS_MULTIMEDIA . 'Svg';
 
     public function __construct($tag_name)
     {
@@ -30,7 +31,8 @@ class Multimedia extends Element
             'audio' => self::ELEMENT_MULTIMEDIA_AUDIO_CLASS,
             'source' => self::ELEMENT_MULTIMEDIA_SOURCE_CLASS,
             'track' => self::ELEMENT_MULTIMEDIA_TRACK_CLASS,
-            'video' => self::ELEMENT_MULTIMEDIA_VIDEO_CLASS
+            'video' => self::ELEMENT_MULTIMEDIA_VIDEO_CLASS,
+            'svg' => self::ELEMENT_MULTIMEDIA_SVG_CLASS
         );
     }
 
