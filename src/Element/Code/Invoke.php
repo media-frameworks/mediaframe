@@ -23,9 +23,9 @@ class Invoke extends Code
 
     private function set_macro_var(&$macro, $name, $value)
     {
-        if (isset($macro->var)) {
-            unset($macro->var->$name);
-        }
+//        if (isset($macro->var)) {
+//            unset($macro->var->$name);
+//        }
         $value = Stack::valueSubstitutions($value);
         Stack::setVar($name, Element::renderElements($value));
     }
