@@ -36,19 +36,33 @@ class Invoke extends Code
         if (!$macro) {
             return $macro_name . ' not found';
         }
+        $original_vars = array();
         if ($markup != null) {
             if (isset($markup->var)) {
                 foreach ($markup->var as $name => $value) {
+                    $current_value = Stack::getVar($name);
+                    if ($current_value) {
+                        $original_vars[$name] = $current_value;
+                    }
                     $this->set_macro_var($macro, $name, $value);
                 }
             } else {
                 foreach ($markup as $var_name => $var_value) {
+                    $current_value = Stack::getVar($var_name);
+                    if ($current_value) {
+                        $original_vars[$var_name] = Stack::getVar($var_name);
+                    }
                     $this->set_macro_var($macro, $var_name, $var_value);
                 }
             }
         }
         Stack::shareFrame();
-        return Element::renderElements($macro);
+        $result = Element::renderElements($macro);
+        foreach($original_vars as $var_name => $var_value){
+            Stack::setVar($var_name,$var_value);
+        }
+        Stack::shareFrame();
+        return $result;
     }
 
     public function render($markup)
