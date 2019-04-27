@@ -61,7 +61,6 @@ class Invoke extends Code
         foreach($original_vars as $var_name => $var_value){
             Stack::setVar($var_name,$var_value);
         }
-        Stack::shareFrame();
         return $result;
     }
 
