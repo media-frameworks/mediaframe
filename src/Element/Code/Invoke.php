@@ -16,42 +16,18 @@ class Invoke extends Code
         parent::__construct($tag_name);
     }
 
-    private function invokeImplodeService($markup)
-    {
-        if (!isset($markup->delimiter) || !isset($markup->pieces) || !is_array($markup->pieces)) {
-            return '';
-        }
-        return implode($markup->delimiter, $markup->pieces);
-    }
-
     public function render_indent()
     {
         return false;
     }
 
-    private function invokeMailService($markup)
+    private function set_macro_var(&$macro, $name, $value)
     {
-        if (!isset($markup->to) || !isset($markup->subject) || !isset($markup->message) || !isset($markup->headers)) {
-            return '';
+        if (isset($macro->var)) {
+            unset($macro->var->$name);
         }
-        if (is_object($markup->message)) {
-            $markup->message = Element::renderElements($markup->message);
-        }
-        mail($markup->to, $markup->subject, $markup->message, $markup->headers);
-        return '';
-    }
-
-    private function invokeService($markup)
-    {
-        switch ($markup->service) {
-            case self::INVOKE_MAIL_SERVICE:
-                return $this->invokeMailservice($markup);
-            case self::INVOKE_IMPLODE_SERVICE:
-                return $this->invokeImplodeService($markup);
-
-            default:
-                return '';
-        }
+        $value = Stack::valueSubstitutions($value);
+        Stack::setVar($name, Element::renderElements($value));
     }
 
     private function invokeMacro($macro_name, $markup = null)
@@ -63,11 +39,11 @@ class Invoke extends Code
         if ($markup != null) {
             if (isset($markup->var)) {
                 foreach ($markup->var as $name => $value) {
-                    if (isset($macro->var)) {
-                        unset($macro->var->$name);
-                    }
-                    $value = Stack::valueSubstitutions($value);
-                    Stack::setVar($name, Element::renderElements($value));
+                    $this->set_macro_var($macro, $name, $value);
+                }
+            } else {
+                foreach ($markup as $var_name => $var_value) {
+                    $this->set_macro_var($macro, $var_name, $var_value);
                 }
             }
         }
@@ -80,13 +56,18 @@ class Invoke extends Code
         if (is_string($markup)) {
             return $this->invokeMacro($markup);
         }
-        if (isset($markup->service)) {
-            return $this->invokeService($markup);
+        if (is_object($markup)) {
+            if (isset($markup->name)) {
+                return $this->invokeMacro($markup->name, $markup);
+            }
+            $results = array();
+            foreach ($markup as $macro_name => $macro_markup) {
+                $results[] = $this->invokeMacro($macro_name, $macro_markup);
+            }
+            if (count($results)) {
+                return implode("\n", $results);
+            }
         }
-        if (!isset($markup->name)) {
-            return 'macro name not set';
-        }
-        $result = $this->invokeMacro($markup->name, $markup);
-        return $result;
+        return 'nothing to invoke';
     }
 }
