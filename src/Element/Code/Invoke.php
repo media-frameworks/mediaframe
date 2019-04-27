@@ -21,8 +21,12 @@ class Invoke extends Code
         return false;
     }
 
-    private function set_macro_var(&$macro, $name, $value)
+    private function set_macro_var(&$macro, $name, $value, &$original_vars)
     {
+        $current_value = Stack::getVar($name);
+        if ($current_value) {
+            $original_vars[$name] = Stack::getVar($name);
+        }
         if (isset($macro->var)) {
             unset($macro->var->$name);
         }
@@ -40,31 +44,11 @@ class Invoke extends Code
         if ($markup != null) {
             if (isset($markup->var)) {
                 foreach ($markup->var as $name => $value) {
-                    $current_value = Stack::getVar($name);
-                    if ($current_value) {
-                        $original_vars[$name] = $current_value;
-                    }
-//                    $this->set_macro_var($macro, $name, $value);
-
-                    if (isset($macro->var)) {
-                        unset($macro->var->$name);
-                    }
-                    $value = Stack::valueSubstitutions($value);
-                    Stack::setVar($name, Element::renderElements($value));
+                    $this->set_macro_var($macro, $name, $value, $original_vars);
                 }
             } else {
                 foreach ($markup as $var_name => $var_value) {
-                    $current_value = Stack::getVar($var_name);
-                    if ($current_value) {
-                        $original_vars[$var_name] = Stack::getVar($var_name);
-                    }
-                    //$this->set_macro_var($macro, $var_name, $var_value);
-
-                    if (isset($macro->var)) {
-                        unset($macro->var->$var_name);
-                    }
-                    $var_value = Stack::valueSubstitutions($var_value);
-                    Stack::setVar($var_name, Element::renderElements($var_value));
+                    $this->set_macro_var($macro, $var_name, $var_value, $original_vars);
                 }
             }
         }
