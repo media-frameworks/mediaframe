@@ -44,7 +44,13 @@ class Invoke extends Code
                     if ($current_value) {
                         $original_vars[$name] = $current_value;
                     }
-                    $this->set_macro_var($macro, $name, $value);
+//                    $this->set_macro_var($macro, $name, $value);
+
+                    if (isset($macro->var)) {
+                        unset($macro->var->$name);
+                    }
+                    $value = Stack::valueSubstitutions($value);
+                    Stack::setVar($name, Element::renderElements($value));
                 }
             } else {
                 foreach ($markup as $var_name => $var_value) {
@@ -52,7 +58,13 @@ class Invoke extends Code
                     if ($current_value) {
                         $original_vars[$var_name] = Stack::getVar($var_name);
                     }
-                    $this->set_macro_var($macro, $var_name, $var_value);
+                    //$this->set_macro_var($macro, $var_name, $var_value);
+
+                    if (isset($macro->var)) {
+                        unset($macro->var->$var_name);
+                    }
+                    $var_value = Stack::valueSubstitutions($var_value);
+                    Stack::setVar($var_name, Element::renderElements($var_value));
                 }
             }
         }
