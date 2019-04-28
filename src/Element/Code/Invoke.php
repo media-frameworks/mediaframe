@@ -56,6 +56,7 @@ class Invoke extends Code
         $result = Element::renderElements($macro);
         foreach($original_vars as $var_name => $var_value){
             Stack::setVar($var_name,$var_value);
+            Stack::shareFrame();
         }
         return $result;
     }
