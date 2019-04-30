@@ -15,6 +15,9 @@ class Macro extends Code
     public function render($markup)
     {
         foreach ($markup as $name => $value) {
+            if (is_array($value)) {
+                $value['__FRAME_INDEX__'] = Stack::$frame_index;
+            }
             Stack::setMacro($name, $value);
         }
         Stack::shareFrame();

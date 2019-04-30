@@ -54,6 +54,16 @@ class Invoke extends Code
         }
         Stack::shareFrame();
         $result = Element::renderElements($macro);
+
+        // adjust the indenting
+        if (is_array($macro) && isset($macro['__FRAME_INDEX__'])) {
+            $frame_difference = Stack::$frame_index - $macro['__FRAME_INDEX__'];
+            for ($i = 0; $i < $frame_difference; $i++) {
+                $result = '   ' . str_replace("\n", "\n   ", $result);
+            }
+        }
+
+        // reset the original var values
         foreach($original_vars as $var_name => $var_value){
             Stack::setVar($var_name,$var_value);
             Stack::shareFrame();
