@@ -56,8 +56,8 @@ class Invoke extends Code
         $result = Element::renderElements($macro);
 
         // adjust the indenting
-        if (is_array($macro) && isset($macro['__FRAME_INDEX__'])) {
-            $frame_difference = Stack::$frame_index - $macro['__FRAME_INDEX__'];
+        if (is_object($macro) && isset($macro->__FRAME_INDEX__)) {
+            $frame_difference = Stack::$frame_index - $macro->__FRAME_INDEX__;
             for ($i = 0; $i < $frame_difference; $i++) {
                 $result = '   ' . str_replace("\n", "\n   ", $result);
             }
