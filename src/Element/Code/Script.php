@@ -40,17 +40,31 @@ class Script extends Code
         return '</script>';
     }
 
+    private function recurse_srcs($markup)
+    {
+        $result = '';
+        foreach ($markup->src as $src) {
+            $mark = $markup;
+            if (!is_array($src)) {
+                $srcs = [$src];
+            } else {
+                $srcs = $src;
+            }
+            foreach ($srcs as $src) {
+                $mark->src = $src;
+                $result .= $this->openScriptTag($mark);
+                $result .= $this->closeScriptTag();
+            }
+        }
+        return $result;
+    }
+
     public function render($markup)
     {
         $result = '';
         if (isset($markup->src)) {
             if (is_array($markup->src)) {
-                foreach ($markup->src as $src) {
-                    $mark = $markup;
-                    $mark->src = $src;
-                    $result .= $this->openScriptTag($mark);
-                    $result .= $this->closeScriptTag();
-                }
+                $result .= $this->recurse_srcs($markup);
             } else {
                 $result .= $this->openScriptTag($markup);
                 $result .= $this->closeScriptTag();
