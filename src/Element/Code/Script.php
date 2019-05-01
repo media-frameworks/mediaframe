@@ -45,6 +45,7 @@ class Script extends Code
         $result = '';
         foreach ($markup->src as $src) {
             $mark = $markup;
+            $src = Stack::valueSubstitutions($src);
             if (!is_array($src)) {
                 $srcs = [$src];
             } else {
