@@ -23,10 +23,7 @@ class Invoke extends Code
 
     private function set_macro_var(&$macro, $name, $value, &$original_vars)
     {
-        $current_value = Stack::getVar($name);
-        if ($current_value) {
-            $original_vars[$name] = Stack::getVar($name);
-        }
+        $original_vars[$name] = Stack::getVar($name);
         if (isset($macro->var)) {
             unset($macro->var->$name);
         }
@@ -64,8 +61,8 @@ class Invoke extends Code
         }
 
         // reset the original var values
-        foreach($original_vars as $var_name => $var_value){
-            Stack::setVar($var_name,$var_value);
+        foreach ($original_vars as $var_name => $var_value) {
+            Stack::setVar($var_name, $var_value);
             Stack::shareFrame();
         }
         return $result;
