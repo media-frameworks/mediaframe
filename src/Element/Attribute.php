@@ -171,7 +171,6 @@ abstract class Attribute extends Element
                 switch ($value) {
                     case "true":
                     case "1":
-                    case true:
                         $result .= ' ' . $name;
                         break;
                     case "false":
