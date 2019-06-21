@@ -156,7 +156,8 @@ abstract class Attribute extends Element
         foreach ($script as $name => $value) {
             $attr = $name;
             if (0 === strpos($name, 'data-')) {
-                $attr = "data-";
+                $result .= ' ' . $name . '="' . $value . '"';
+                continue;
             }
             if (!isset($attrs[$attr])) {
                 continue;
@@ -194,9 +195,6 @@ abstract class Attribute extends Element
                     case 'tojson':
                         $value = json_encode($value);
                         $attr = 'value';
-                        break;
-                    case 'data-':
-                        $attr = $name;
                         break;
                 }
                 $result .= ' ' . self::transformAttr($attr) . '="' . str_replace('"', '&quot;', $value) . '"';
