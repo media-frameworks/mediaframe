@@ -51,7 +51,6 @@ class Import extends Code
             $full_path = $script;
         } else {
             $in_script_dir = Stack::getConstant('local::script_dir') . '/' . $script;
-            echo($in_script_dir);
             if (file_exists($in_script_dir)) {
                 $full_path = $in_script_dir;
             } else {
