@@ -180,10 +180,10 @@ abstract class Attribute extends Element
                         break;
                 }
             } else {
-                if (is_object($value)){
+                if (is_object($value)) {
                     $value = Element::renderElements($value);
                 }
-                switch($attr) {
+                switch ($attr) {
                     case 'class':
                         $value = strtolower($value);
                         break;
@@ -193,7 +193,10 @@ abstract class Attribute extends Element
                         break;
                     case 'tojson':
                         $value = json_encode($value);
-			$attr = 'value';
+                        $attr = 'value';
+                        break;
+                    case 'data-':
+                        $attr = $name;
                         break;
                 }
                 $result .= ' ' . self::transformAttr($attr) . '="' . str_replace('"', '&quot;', $value) . '"';
