@@ -17,6 +17,7 @@ class Markup
     public function __construct($script_path, $request_params = array(), $app_name = '<noappname>')
     {
         $this->script_path = $script_path;
+        Stack::setConstant('local::script_dir', dirname($script_path));
         $this->request_params = $request_params;
         $this->app_name = $app_name;
     }

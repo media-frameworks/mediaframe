@@ -21,15 +21,19 @@ class SwitchElement extends Code
             return 'case not set';
         }
         $value = (string)self::renderElements($markup->value);
-        if (isset($markup->case->$value)) {
+        $cases = array();
+        foreach ($markup->case as $case_value => $case_render){
+            $cases[Stack::valueSubstitutions($case_value)] = $case_render;
+        }
+        if (isset($cases[$value])) {
             Stack::offsetIndent(1);
-            $result = parent::renderElements($markup->case->$value);
+            $result = parent::renderElements($cases[$value]);
             Stack::offsetIndent(-1);
             return $result;
         }
-        if (isset($markup->case->default)) {
+        if (isset($cases['default'])) {
             Stack::offsetIndent(1);
-            $result = parent::renderElements($markup->case->default);
+            $result = parent::renderElements($cases['default']);
             Stack::offsetIndent(-1);
             return $result;
         }
