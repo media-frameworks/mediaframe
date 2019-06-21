@@ -156,9 +156,9 @@ abstract class Attribute extends Element
         foreach ($script as $name => $value) {
             $attr = $name;
             if (0 === strpos($name, 'data-')) {
-                $name = "data-";
+                $attr = "data-";
             }
-            if (!isset($attrs[$name])) {
+            if (!isset($attrs[$attr])) {
                 continue;
             }
             if ($name == 'style') {
