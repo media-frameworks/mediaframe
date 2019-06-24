@@ -27,8 +27,17 @@ class Invoke extends Code
         if (isset($macro->var)) {
             unset($macro->var->$name);
         }
-        $value = Stack::valueSubstitutions($value);
-        Stack::setVar($name, Element::renderElements($value));
+        $value = Element::renderElements($value);
+        Stack::setVar($name, $value);
+        if (is_array($value)) {
+            foreach ($value as $k => $v) {
+                Stack::setVar($name . '[' . $k . ']', $v);
+            }
+        } else if (is_object($value)) {
+            foreach ($value as $k => $v) {
+                Stack::setVar($name . '->' . $k, $v);
+            }
+        }
     }
 
     private function invokeMacro($macro_name, $markup = null)
